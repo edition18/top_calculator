@@ -79,6 +79,15 @@ button {
 
 <script>
 
+const specialpairs = {
+    bclear: "",
+    bmulti: "*",
+    bmin: "-",
+    beq: "=",
+    bplus: "+",
+};
+
+
 const pairs = {
     b1: 1,
     b2: 2,
@@ -89,12 +98,8 @@ const pairs = {
     b7: 7,
     b8: 8,
     b9: 9,
-    bclear: 0,
-    bmulti: "*",
-    bmin: "-",
-    beq: "=",
-    bplus: "+",
 };
+
 
 
 function loadButtons () {
@@ -106,7 +111,11 @@ function loadButtons () {
         // in this case only 1 for that name
         console.log(targetCell);
         targetCell.addEventListener('click', () => {
-
+            // you want it to manipulate the display as and when clicked
+            var currentDisplay = document.querySelector(".display").innerHTML.toString();
+            newDisplay = currentDisplay + pairs[item].toString();
+            document.querySelector(".display").innerHTML = newDisplay;
+            
         })
 
         
