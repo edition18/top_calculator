@@ -5,23 +5,23 @@
         </div>
 
         <div class="button-area">
-            <button>1</button>
-            <button>2</button>
-            <button>3</button>
-            <button>+</button>
+            <button class="b1">1</button>
+            <button class="b2">2</button>
+            <button class="b3">3</button>
+            <button class="bplus">+</button>
             <br />
-            <button>4</button>
-            <button>5</button>
-            <button>6</button>
-            <button> - </button>
+            <button class="b4">4</button>
+            <button class="b5">5</button>
+            <button class="b6">6</button>
+            <button class="bmin"> - </button>
             <br />
-            <button>7</button>
-            <button>8</button>
-            <button>9</button>
-            <button>*</button>
+            <button class="b7">7</button>
+            <button class="b8">8</button>
+            <button class="b9">9</button>
+            <button class="bmulti">*</button>
             <br />
-            <button>CE</button>
-            <button>=</button>
+            <button class="bclear">CE</button>
+            <button class="beq">=</button>
         </div>
     </div>
 
@@ -46,9 +46,9 @@
 button {
     height: 40px;
     width: 40px;
-    background-color: #4CAF50;
+    background-color: black;
     border: none;
-    color: black;
+    color: white;
     text-align: center;
     font-size: 16px;
     margin: 4px 4px;
@@ -67,7 +67,55 @@ button {
 .container {
     width: 240px;
     height: 500px;
+    /* center element */
+    margin-left: auto;
+    margin-right: auto;
+    display: block;
 }
 
 
+
 </style>
+
+<script>
+
+const pairs = {
+    b1: 1,
+    b2: 2,
+    b3: 3,
+    b4: 4,
+    b5: 5,
+    b6: 6,
+    b7: 7,
+    b8: 8,
+    b9: 9,
+    bclear: 0,
+    bmulti: "*",
+    bmin: "-",
+    beq: "=",
+    bplus: "+",
+};
+
+
+function loadButtons () {
+    for (var item in pairs) {
+        //for each key property in pairs
+
+        let targetCell = document.querySelector("." + item.toString())
+        // querySelector only targets the FIRST element found
+        // in this case only 1 for that name
+        console.log(targetCell);
+        targetCell.addEventListener('click', () => {
+
+        })
+
+        
+        // console.log(pairs[item]);
+        // // pairs[item] retrieves the value to that "key"        
+    }
+};
+
+loadButtons();
+
+
+</script>
