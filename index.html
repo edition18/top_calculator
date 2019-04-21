@@ -1,22 +1,28 @@
 <html>
-    <div class="button-area">
-        <button>1</button>
-        <button>2</button>
-        <button>3</button>
-        <button>+</button>
-        <br />
-        <button>4</button>
-        <button>5</button>
-        <button>6</button>
-        <button> - </button>
-        <br />
-        <button>7</button>
-        <button>8</button>
-        <button>9</button>
-        <button>*</button>
-        <br />
-        <button>CE</button>
-        <button>=</button>
+    <div class="container">
+        <div class="display">
+            test
+        </div>
+
+        <div class="button-area">
+            <button>1</button>
+            <button>2</button>
+            <button>3</button>
+            <button>+</button>
+            <br />
+            <button>4</button>
+            <button>5</button>
+            <button>6</button>
+            <button> - </button>
+            <br />
+            <button>7</button>
+            <button>8</button>
+            <button>9</button>
+            <button>*</button>
+            <br />
+            <button>CE</button>
+            <button>=</button>
+        </div>
     </div>
 
 </html>
@@ -30,6 +36,10 @@
 }
 
 .button-area {
+    width: 210px;
+    /* center element */
+    margin-left: auto;
+    margin-right: auto;
     display: block;
 }
 
@@ -45,5 +55,19 @@ button {
     cursor: pointer;
     text-align: center;
 }
+
+.display {
+    color: black;
+    font-size: 24px;
+    border-style: solid;
+    border-width: 0.5px;
+    border-color:black
+}
+
+.container {
+    width: 240px;
+    height: 500px;
+}
+
 
 </style>
