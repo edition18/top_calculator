@@ -105,7 +105,7 @@ const pairs = {
 
 
 
-function onClick(item, pairs) {
+function onClick(item) {
     return () => {
                 // you want it to manipulate the display as and when clicked
                 var currentDisplay = document.querySelector(".display-area").innerHTML.toString();
@@ -117,6 +117,8 @@ function onClick(item, pairs) {
 var Properties = Object.keys(pairs);
 
 function loadButtons() {
+    // see CLOSURE problem
+    // https://stackoverflow.com/questions/55781637/iterating-across-multiple-buttons-using-key-value-pairs-array-to-add-event-liste
     for (var item in pairs) {
         //for each key property in pairs
 
@@ -124,7 +126,7 @@ function loadButtons() {
         // querySelector only targets the FIRST element found
         // in this case only 1 for that name
 
-        targetCell.addEventListener('click', onClick(item, pairs)) 
+        targetCell.addEventListener('click', onClick(item)) 
 
         // console.log(pairs[item]);
         // pairs[item] retrieves the value to that "key"        
