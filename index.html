@@ -102,51 +102,36 @@ const pairs = {
     b8: 8,
     b9: 9,
 };
+
+
+
+function onClick(item, pairs) {
+    return () => {
+                // you want it to manipulate the display as and when clicked
+                var currentDisplay = document.querySelector(".display-area").innerHTML.toString();
+                var newDisplay = currentDisplay + pairs[item].toString();
+                document.querySelector(".display-area").innerHTML = newDisplay;
+                }
+    } 
+
 var Properties = Object.keys(pairs);
-console.log(pairs[Properties[0]]);
-
-function alternative() {
-    var i;
-    var Properties = Object.keys(pairs);
-    for (i = 0; i < Properties.length; i++) {
-        let targetCell = document.querySelector("." + Properties[i].toString())
-        // querySelector only targets the FIRST element found
-        // in this case only 1 for that name
-        console.log(targetCell);
-        targetCell.addEventListener('click', () => {
-            // you want it to manipulate the display as and when clicked
-            var currentDisplay = document.querySelector(".display-area").innerHTML.toString();
-            newDisplay = currentDisplay + pairs[Properties[i]].toString();
-            document.querySelector(".display-area").innerHTML = newDisplay;
-            
-        })
-    };
-};
-
-
 
 function loadButtons() {
     for (var item in pairs) {
         //for each key property in pairs
-        
-        console.log(item);
+
         let targetCell = document.querySelector("." + item.toString())
         // querySelector only targets the FIRST element found
         // in this case only 1 for that name
-        console.log(targetCell);
-        targetCell.addEventListener('click', () => {
-            // you want it to manipulate the display as and when clicked
-            var currentDisplay = document.querySelector(".display-area").innerHTML.toString();
-            newDisplay = currentDisplay + pairs[item].toString();
-            console.log(pairs[item]);
-            document.querySelector(".display-area").innerHTML = newDisplay;
-        })
-        console.log(pairs[item]);
+
+        targetCell.addEventListener('click', onClick(item, pairs)) 
 
         // console.log(pairs[item]);
-        // // pairs[item] retrieves the value to that "key"        
+        // pairs[item] retrieves the value to that "key"        
     }
 };
+
+
 
 loadButtons();
 
