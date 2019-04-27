@@ -21,8 +21,11 @@
             <button class="bmulti">*</button>
             <br />
             <button class="bdiv">/</button>
+            <button class="bdot">.</button>
             <button class="bclear">CE</button>
             <button class="beq">=</button>
+            <br />
+            <button class="bback">BACKSPACE</button>
         </div>
     </div>
 
@@ -75,6 +78,9 @@ button {
     display: block;
 }
 
+.bback {
+    width: 180px;
+}
 
 
 </style>
@@ -114,6 +120,30 @@ function onNumClick(item) {
                 }
     }; 
 
+function loadDotButton() {
+    let targetCell = document.querySelector(".bdot");
+    
+    targetCell.addEventListener('click', () => {
+        if (document.querySelector(".display-area").innerHTML.includes(".")) {
+            alert("already has a dot");
+        }
+        else {
+            currentDisplay = document.querySelector(".display-area").innerHTML.toString();
+            newDisplay = currentDisplay + ".";
+            document.querySelector(".display-area").innerHTML = newDisplay;
+        }
+    })
+};
+
+function loadBackButton() {
+    let targetCell = document.querySelector(".bback");
+    
+    targetCell.addEventListener('click', () => {
+        document.querySelector(".display-area").innerHTML = document.querySelector(".display-area").innerHTML.toString().slice(0,-1);
+    })
+};
+
+
 function loadNumButtons() {
     // see CLOSURE problem
     // https://stackoverflow.com/questions/55781637/iterating-across-multiple-buttons-using-key-value-pairs-array-to-add-event-liste
@@ -150,24 +180,25 @@ function onFuncClick(item) {
     };
 
 function applyOperand(Operand) {
-    console.log(Operand);
     if (Operand == "+") {
         newDisplay = parseFloat(savedDisplay) + parseFloat(document.querySelector(".display-area").innerHTML.toString());
-        document.querySelector(".display-area").innerHTML = newDisplay;
+        
     }
     if (Operand == "-") {
         newDisplay = parseFloat(savedDisplay) - parseFloat(document.querySelector(".display-area").innerHTML.toString());
-        document.querySelector(".display-area").innerHTML = newDisplay;
+        
     }
     if (Operand == "*") {
         newDisplay = parseFloat(savedDisplay) * parseFloat(document.querySelector(".display-area").innerHTML.toString());
-        document.querySelector(".display-area").innerHTML = newDisplay;
+        
     }
     if (Operand == "/") {
         newDisplay = parseFloat(savedDisplay) / parseFloat(document.querySelector(".display-area").innerHTML.toString());
-        document.querySelector(".display-area").innerHTML = newDisplay;
+        
     }
-
+    
+    document.querySelector(".display-area").innerHTML = Math.floor(newDisplay * 100) / 100; // to 2 dec place
+    
     Operand = undefined;
 }
     
@@ -194,8 +225,8 @@ function loadClearButton() {
     })
 };
 
-
-
+loadBackButton();
+loadDotButton();
 loadNumButtons();
 loadFuncButtons();
 loadEqualButton();
