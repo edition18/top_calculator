@@ -79,9 +79,6 @@ button {
 
 <script>
 
-
-
-
 const specialpairs = {
     bclear: "",
     bmulti: "*",
@@ -89,7 +86,6 @@ const specialpairs = {
     beq: "=",
     bplus: "+",
 };
-
 
 const pairs = {
     b1: 1,
@@ -103,9 +99,7 @@ const pairs = {
     b9: 9,
 };
 
-
-
-function onClick(item) {
+function onNumClick(item) {
     return () => {
                 // you want it to manipulate the display as and when clicked
                 var currentDisplay = document.querySelector(".display-area").innerHTML.toString();
@@ -114,11 +108,10 @@ function onClick(item) {
                 }
     } 
 
-var Properties = Object.keys(pairs);
-
-function loadButtons() {
+function loadNumButtons() {
     // see CLOSURE problem
     // https://stackoverflow.com/questions/55781637/iterating-across-multiple-buttons-using-key-value-pairs-array-to-add-event-liste
+    // using let var item in pairs removes the need for helper functions
     for (var item in pairs) {
         //for each key property in pairs
 
@@ -126,7 +119,7 @@ function loadButtons() {
         // querySelector only targets the FIRST element found
         // in this case only 1 for that name
 
-        targetCell.addEventListener('click', onClick(item)) 
+        targetCell.addEventListener('click', onNumClick(item)) 
 
         // console.log(pairs[item]);
         // pairs[item] retrieves the value to that "key"        
@@ -135,6 +128,9 @@ function loadButtons() {
 
 
 
-loadButtons();
+
+
+loadNumButtons();
+loadFuncButtons();
 
 </script>
