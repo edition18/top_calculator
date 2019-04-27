@@ -1,7 +1,7 @@
 <html>
     <div class="container">
         <div class="display-area">
-            test
+            
         </div>
 
         <div class="button-area">
@@ -20,6 +20,7 @@
             <button class="b9">9</button>
             <button class="bmulti">*</button>
             <br />
+            <button class="bdiv">/</button>
             <button class="bclear">CE</button>
             <button class="beq">=</button>
         </div>
@@ -81,10 +82,10 @@ button {
 <script>
 
 const funcPairs = {
-    bclear: "",
-    bmulti: "*",
     bmin: "-",
     bplus: "+",
+    bmulti: "*",
+    bdiv: "/",
 };
 
 const pairs = {
@@ -101,15 +102,17 @@ const pairs = {
 
 var savedDisplay;
 var Operand;
+var currentDisplay;
+var newDisplay; //only used by numerical buttons
 
 function onNumClick(item) {
     return () => {
                 // you want it to manipulate the display as and when clicked
-                var currentDisplay = document.querySelector(".display-area").innerHTML.toString();
-                var newDisplay = currentDisplay + pairs[item].toString();
+                currentDisplay = document.querySelector(".display-area").innerHTML.toString();
+                newDisplay = currentDisplay + pairs[item].toString();
                 document.querySelector(".display-area").innerHTML = newDisplay;
                 }
-    } 
+    }; 
 
 function loadNumButtons() {
     // see CLOSURE problem
@@ -141,33 +144,61 @@ function onFuncClick(item) {
     return () => {
                 // you want it to manipulate the display as and when clicked
                 savedDisplay = document.querySelector(".display-area").innerHTML.toString();
-                Operand = funcPairs[item].toString();
-                var newDisplay = "";
-                document.querySelector(".display-area").innerHTML = newDisplay;
+                Operand = funcPairs[item];
+                document.querySelector(".display-area").innerHTML = "";
                 }
-    } 
+    };
+
+function applyOperand(Operand) {
+    console.log(Operand);
+    if (Operand == "+") {
+        newDisplay = parseFloat(savedDisplay) + parseFloat(document.querySelector(".display-area").innerHTML.toString());
+        document.querySelector(".display-area").innerHTML = newDisplay;
+    }
+    if (Operand == "-") {
+        newDisplay = parseFloat(savedDisplay) - parseFloat(document.querySelector(".display-area").innerHTML.toString());
+        document.querySelector(".display-area").innerHTML = newDisplay;
+    }
+    if (Operand == "*") {
+        newDisplay = parseFloat(savedDisplay) * parseFloat(document.querySelector(".display-area").innerHTML.toString());
+        document.querySelector(".display-area").innerHTML = newDisplay;
+    }
+    if (Operand == "/") {
+        newDisplay = parseFloat(savedDisplay) / parseFloat(document.querySelector(".display-area").innerHTML.toString());
+        document.querySelector(".display-area").innerHTML = newDisplay;
+    }
+
+    Operand = undefined;
+}
     
 function loadEqualButton() {
     let targetCell = document.querySelector(".beq");
     
     targetCell.addEventListener('click', () => {
-        console.log(savedDisplay);
-        console.log(Operand);
         if (savedDisplay == undefined || savedDisplay == "") {
             alert("you did not press any func buttons!");
         }
         else {
             console.log(Operand);
+            applyOperand(Operand);
         }
     })
 };
 
-
+function loadClearButton() {
+    let targetCell = document.querySelector(".bclear");
+    
+    targetCell.addEventListener('click', () => {
+        savedDisplay = "";
+        document.querySelector(".display-area").innerHTML = "";
+    })
+};
 
 
 
 loadNumButtons();
 loadFuncButtons();
 loadEqualButton();
+loadClearButton();
 
 </script>
