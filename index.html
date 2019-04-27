@@ -61,7 +61,8 @@ button {
     font-size: 24px;
     border-style: solid;
     border-width: 0.5px;
-    border-color:black
+    border-color:black;
+    height: 35px;
 }
 
 .container {
@@ -79,11 +80,10 @@ button {
 
 <script>
 
-const specialpairs = {
+const funcPairs = {
     bclear: "",
     bmulti: "*",
     bmin: "-",
-    beq: "=",
     bplus: "+",
 };
 
@@ -98,6 +98,9 @@ const pairs = {
     b8: 8,
     b9: 9,
 };
+
+var savedDisplay;
+var Operand;
 
 function onNumClick(item) {
     return () => {
@@ -115,15 +118,48 @@ function loadNumButtons() {
     for (var item in pairs) {
         //for each key property in pairs
 
-        let targetCell = document.querySelector("." + item.toString())
+        let targetCell = document.querySelector("." + item.toString());
         // querySelector only targets the FIRST element found
         // in this case only 1 for that name
 
-        targetCell.addEventListener('click', onNumClick(item)) 
+        targetCell.addEventListener('click', onNumClick(item));
 
         // console.log(pairs[item]);
         // pairs[item] retrieves the value to that "key"        
     }
+};
+
+function loadFuncButtons() {
+
+    for (var item in funcPairs) {
+        let targetCell = document.querySelector("." + item.toString());
+        targetCell.addEventListener('click', onFuncClick(item));
+    }
+};
+
+function onFuncClick(item) {
+    return () => {
+                // you want it to manipulate the display as and when clicked
+                savedDisplay = document.querySelector(".display-area").innerHTML.toString();
+                Operand = funcPairs[item].toString();
+                var newDisplay = "";
+                document.querySelector(".display-area").innerHTML = newDisplay;
+                }
+    } 
+    
+function loadEqualButton() {
+    let targetCell = document.querySelector(".beq");
+    
+    targetCell.addEventListener('click', () => {
+        console.log(savedDisplay);
+        console.log(Operand);
+        if (savedDisplay == undefined || savedDisplay == "") {
+            alert("you did not press any func buttons!");
+        }
+        else {
+            console.log(Operand);
+        }
+    })
 };
 
 
@@ -132,5 +168,6 @@ function loadNumButtons() {
 
 loadNumButtons();
 loadFuncButtons();
+loadEqualButton();
 
 </script>
